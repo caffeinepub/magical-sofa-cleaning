@@ -1,0 +1,53 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add Service Areas section (Ahmedabad + Gandhinagar) to landing page",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add a new Service Areas section to LandingPage that matches the provided HTML snippet structure and Tailwind layout (section wrapper, container, centered H2, responsive 2-column card grid with inner responsive locality grids).",
+      "acceptanceCriteria": [
+        "LandingPage renders a dedicated Service Areas section with the same layout semantics as the provided snippet (section > container > h2 > 2-column card grid).",
+        "On mobile it displays 1 column; on md+ it displays 2 columns, matching the snippet’s responsive behavior.",
+        "Each card contains an inner grid that becomes 3 columns on small screens (sm:grid-cols-3) as in the snippet."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Implement a new “Service Areas” section using the same high-level structure and Tailwind class semantics as the user’s snippet: a section wrapper with py-16 bg-white, a container layout, a centered H2, and a responsive grid (1 col mobile, 2 col md+) of two area cards (Ahmedabad and Gandhinagar). Each card should include a title row and an inner responsive grid of locality <span> items using sm:grid-cols-3. Place the section at an appropriate location in the existing page flow (e.g., near other informational sections) without introducing new routes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Preserve the exact Gujarati/English Service Areas content from the user snippet, including the concluding italic note line.",
+      "acceptanceCriteria": [
+        "All localities listed in the snippet appear on the page (Ahmedabad list + Gandhinagar list) with no omissions or renaming.",
+        "The concluding note line renders at the bottom of the section with italic styling and the same visible text as the snippet."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Copy the Service Areas text content exactly from the user-provided snippet (including Gujarati locality names, the parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, “(All Over Gandhinagar)”, and the concluding italic note line) and render it in the new section with the same visible wording and intended emphasis/italics."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Replace the snippet’s Font Awesome map-marker icon with an existing in-project icon approach (lucide-react) while keeping the same placement next to each city heading.",
+      "acceptanceCriteria": [
+        "Each city heading shows a map-marker style icon aligned inline before the heading text.",
+        "No Font Awesome dependency or <i class=\"fas ...\"> usage remains in the codebase."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Use a lucide-react map/pin icon (e.g., MapPin) placed inline to the left of each city heading to match the snippet’s visual placement, and ensure no Font Awesome <i class=\"fas ...\"> usage is introduced."
+        }
+      ]
+    }
+  ]
+}

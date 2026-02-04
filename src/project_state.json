@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 25,
+  "summary": "Project includes a full ICP canister template app (Motoko backend + React/Vite frontend with shadcn/ui, Internet Identity auth hooks, typed actor bindings, and build/deploy tooling) alongside an enhanced Gujarati cleaning-service landing page featuring updated SEO meta tags, WhatsApp/call CTAs, embedded Google Maps location section, Google Review CTA, customer testimonials/trust highlights, and detailed service-areas coverage for Ahmedabad & Gandhinagar.",
+  "existing_features": [
+    {
+      "id": "IF-1",
+      "title": "SEO meta tags for service landing page",
+      "synonyms": [
+        "meta description",
+        "meta keywords",
+        "SEO metadata"
+      ],
+      "description": "Adds/updates SEO-relevant meta tags (e.g., description and keywords) for the cleaning service landing page.",
+      "reqIds": [
+        "AR-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "IF-2",
+      "title": "Internet Identity authentication integration",
+      "synonyms": [
+        "II login",
+        "Internet Identity provider",
+        "authentication"
+      ],
+      "description": "Adds frontend authentication support using Internet Identity, including login/logout flows and related hooks/utilities.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-3",
+      "title": "ICP backend canister + typed frontend actor integration",
+      "synonyms": [
+        "Motoko backend",
+        "canister interface",
+        "actor hooks"
+      ],
+      "description": "Includes a Motoko backend canister and generated/typed frontend bindings with actor initialization hooks for calling canister methods from the React app.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-4",
+      "title": "shadcn/ui component system integrated into frontend",
+      "synonyms": [
+        "UI component library",
+        "shadcn components",
+        "Tailwind UI"
+      ],
+      "description": "Adds shadcn/ui component setup (components registry/config, Tailwind styling, and a library of UI primitives) to support building the frontend UI consistently.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-5",
+      "title": "Build/deploy template tooling for ICP project",
+      "synonyms": [
+        "build template",
+        "deploy scripts",
+        "Docker build"
+      ],
+      "description": "Provides project-level build template configuration (Dockerfile, scripts, workspace/package configs, and deploy tooling) for repeatable builds and deployments.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-new-service-areas-section-on-the-landing-page-frontend-src-components-landingpage-tsx-that-matches-the-structure-and-tailwind-styling-provided-by-the-user-s-html-snippet-section-wrapper-py-16-bg-white-container-layout-a-centered-h2-title-and-a-responsive-2-column-grid-containing-two-area-cards-ahmedabad-and-gandhinagar-each-with-a-title-row-and-an-inner-responsive-grid-list-of-locality-span-items",
+      "title": "Implement a new “Service Areas” section on the landing page (frontend/src/components/LandingPage.tsx) that matches the structure and Tailwind styling provided by the user’s HTML snippet: section wrapper (py-16 bg-white), container layout, a centered H2 title, and a responsive 2-column grid containing two area cards (Ahmedabad and Gandhinagar) each with a title row and an inner responsive grid list of locality <span> items.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-preserve-the-exact-service-areas-content-from-the-user-s-snippet-including-gujarati-locality-names-and-the-existing-parenthetical-english-descriptors-like-service-areas-all-over-ahmedabad-and-all-over-gandhinagar-and-include-the-concluding-italic-note-line-exactly-as-provided",
+      "title": "Preserve the exact Service Areas content from the user’s snippet (including Gujarati locality names and the existing parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, and “(All Over Gandhinagar)”), and include the concluding italic note line exactly as provided.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-snippet-s-font-awesome-icon-usage-i-class-fas-fa-map-marker-alt-with-an-equivalent-icon-approach-already-used-in-the-project-e-g-a-lucide-react-map-pin-icon-while-keeping-the-same-visual-placement-icon-to-the-left-of-each-city-heading-do-not-add-font-awesome-as-a-dependency",
+      "title": "Replace the snippet’s Font Awesome icon usage (<i class=\"fas fa-map-marker-alt\">) with an equivalent icon approach already used in the project (e.g., a lucide-react map/pin icon), while keeping the same visual placement (icon to the left of each city heading). Do not add Font Awesome as a dependency.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [],
+  "architectural_notes": [
+    "Project scaffold expanded to a full ICP template: Motoko backend canister and React/Vite frontend, with canister YAML configs and generated DID/type bindings.",
+    "Frontend authentication includes Internet Identity support with dedicated hooks/utilities and linting rules enforcing provider usage.",
+    "UI stack includes Tailwind + shadcn/ui with a broad set of prebuilt UI primitives added under frontend src/components/ui.",
+    "Repository now contains build-template tooling (Dockerfile, workspace configs, image resize/prune scripts, deploy script) to standardize build/deploy.",
+    "A standalone reusable ICP app template is maintained under build-template/ (Dockerfile, deploy tooling, backend/frontend canister YAMLs, ESLint rules, shadcn/ui primitives), mirroring the main project structure for standardized export/reuse.",
+    "Service landing page includes WhatsApp deep links (wa.me) for inquiries plus tel: links for click-to-call CTAs.",
+    "Service landing page embeds Google Maps via iframe for location display.",
+    "Service landing page includes a Google Review CTA section linking to a review URL (g.page).",
+    "Service landing page includes customer testimonial/trust sections and a detailed Service Areas section listing Ahmedabad and Gandhinagar localities."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "generatedImages": [
+    {
+      "filename": "frontend/public/assets/generated/hero-sofa-cleaning.dim_1920x900.jpg",
+      "description": "Generated hero/banner image for the sofa cleaning landing page.",
+      "targetWidth": 1920,
+      "targetHeight": 900
+    },
+    {
+      "filename": "frontend/public/assets/generated/magical-service-logo.dim_512x512.png",
+      "description": "Generated logo/brand image for the service.",
+      "targetWidth": 512,
+      "targetHeight": 512
+    }
+  ],
+  "projectName": "Add detailed Service Areas section (Ahmedabad + Gandhinagar) to landing page",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

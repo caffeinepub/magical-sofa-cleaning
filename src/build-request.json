@@ -1,0 +1,73 @@
+{
+  "kind": "build_request",
+  "title": "Add detailed Service Areas section (Ahmedabad + Gandhinagar) to landing page",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a new “Service Areas” section on the landing page (frontend/src/components/LandingPage.tsx) that matches the structure and Tailwind styling provided by the user’s HTML snippet: section wrapper (py-16 bg-white), container layout, a centered H2 title, and a responsive 2-column grid containing two area cards (Ahmedabad and Gandhinagar) each with a title row and an inner responsive grid list of locality <span> items.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "<section class=\"py-16 bg-white\"> ... <h2 class=\"text-3xl font-bold text-center mb-10 text-gray-800\">અમારા સર્વિસ વિસ્તારો (Service Areas)</h2> ... </section>"
+        ]
+      },
+      "acceptanceCriteria": [
+        "LandingPage renders a dedicated Service Areas section with the same layout semantics as the provided snippet (section > container > h2 > 2-column card grid).",
+        "On mobile it displays 1 column; on md+ it displays 2 columns, matching the snippet’s responsive behavior.",
+        "Each card contains an inner grid that becomes 3 columns on small screens (sm:grid-cols-3) as in the snippet."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Preserve the exact Service Areas content from the user’s snippet (including Gujarati locality names and the existing parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, and “(All Over Gandhinagar)”), and include the concluding italic note line exactly as provided.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "અમદાવાદ (All Over Ahmedabad) ... ગાંધીનગર (All Over Gandhinagar) ... * ઉપર દર્શાવેલ તમામ વિસ્તારોમાં અમે **Home Service** પૂરી પાડીએ છીએ."
+        ]
+      },
+      "acceptanceCriteria": [
+        "All localities listed in the snippet appear on the page (Ahmedabad list + Gandhinagar list) with no omissions or renaming.",
+        "The concluding note line renders at the bottom of the section with italic styling and the same visible text as the snippet."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Replace the snippet’s Font Awesome icon usage (<i class=\"fas fa-map-marker-alt\">) with an equivalent icon approach already used in the project (e.g., a lucide-react map/pin icon), while keeping the same visual placement (icon to the left of each city heading). Do not add Font Awesome as a dependency.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "<i class=\"fas fa-map-marker-alt mr-2\"></i>"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each city heading shows a map-marker style icon aligned inline before the heading text.",
+        "No Font Awesome dependency or <i class=\"fas ...\"> usage remains in the codebase."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/components/ui (read-only).",
+    "Do not modify frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
+    "Backend remains single-actor; no backend changes are required for this UI-only section."
+  ],
+  "nonGoals": [
+    "Do not add or change Internet Identity authentication behavior.",
+    "Do not change existing SEO meta tags or add structured data unless explicitly requested.",
+    "Do not introduce new third-party icon libraries (e.g., Font Awesome)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
