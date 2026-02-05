@@ -1,6 +1,6 @@
 {
   "frontend/src/App.tsx": "Main application component that renders the LandingPage component as the root view.",
-  "frontend/src/components/LandingPage.tsx": "Simplified single-page landing component with sticky navbar (logo with fallback, phone CTA), two-card rate list section (Cleaning and AC Service with exact prices), UPI payment section with subtle fade-in animation using IntersectionObserver, and minimal footer with caffeine.ai attribution.",
+  "frontend/src/components/LandingPage.tsx": "Single-page landing component matching the MAGICAL SERVICE HTML layout with sticky navbar (text-only brand), blue hero section with WhatsApp CTA, 4-card service rates grid with hover lift effects, dark benefits strip, UPI payment section with QR code and Google review button, and fixed WhatsApp floating action button using inline SVG icons instead of FontAwesome.",
   "frontend/src/index.css": "Global styles with OKLCH color system including custom brand tokens for navy-blue and whatsapp colors, base typography, and focus-visible accessibility styles.",
   "frontend/tailwind.config.js": "Tailwind configuration extended with custom navy-blue and whatsapp color tokens, plus new fade-in-up keyframe animation for the UPI payment card entrance effect.",
   "frontend/index.html": "HTML entry point with updated SEO metadata including exact title \"Magical Sofa Cleaning Service | Best Cleaning in Ahmedabad & Gandhinagar\", description, keywords, and author meta tags as specified by the user."

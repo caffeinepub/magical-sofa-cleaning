@@ -1,72 +1,62 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-05T03:53:02.145Z",
-  "summary": "LandingPage.tsx was refactored toward the requested simplified layout (sticky navbar with tel: link, English headings, logo fallback, and IntersectionObserver-based UPI visibility state). However, due to truncation and limited evidence, several snippet-exact requirements (UPI QR URL, full rate list details for both cards, and 2026 footer text) cannot be confirmed. Additionally, unrelated changes appear to have been made (SEO metadata, Tailwind theme token expansion), and the footer may include unrequested attribution.",
+  "generatedAt": "2026-02-05T04:10:17.524Z",
+  "summary": "LandingPage.tsx shows a new sticky navbar, hero section, and at least the first two service-rate cards with hover lift and icon replacements via lucide-react/react-icons and inline SVG. However, the diff for LandingPage.tsx is truncated before the full services grid and subsequent sections, so several REQ-1 elements cannot be verified from the provided evidence. Additional edits to project_state.json and frontend-file-summaries.txt appear unrelated to the requested UI update.",
   "missing_requirements": [
     {
       "id": "REQ-1",
-      "requirement": "Ensure the rate list shows two cards (Cleaning and AC Service) with the exact line items and prices shown in the snippet.",
-      "reason": "The diff for LandingPage.tsx is truncated mid-way through the second card (AC Service), so the exact items/prices cannot be verified from the provided evidence.",
+      "requirement": "Render the full \"Our Service Rates\" section with four service-rate cards (Sofa/AC Jet/Mattress/Carpet-Chair) matching the snippet styling and hover behavior.",
+      "reason": "Only the first two cards are visible in the truncated diff; the remainder of the grid (including cards 3–4) is not shown, so implementation of all four cards cannot be verified.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (truncated)"
+        "frontend/src/components/LandingPage.tsx (truncated after second card; shows 'classNa ... [truncated]')"
       ]
     },
     {
       "id": "REQ-1",
-      "requirement": "UPI section must show the QR image and UPI ID exactly as in the snippet (including UPI ID jrg7311@okicici) and include the service area caption.",
-      "reason": "Only the UPI ID constant is visible; the QR image element and service-area caption are not shown in the truncated diff.",
+      "requirement": "Render the 3-item benefits strip with the same mobile border-top behavior, after the service rates section.",
+      "reason": "No benefits-strip markup is visible in the provided (truncated) LandingPage.tsx diff, so it cannot be confirmed.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (truncated)"
+        "frontend/src/components/LandingPage.tsx (truncated before any benefits strip section)"
       ]
     },
     {
       "id": "REQ-1",
-      "requirement": "Footer displays the copyright text for 2026 as in the snippet.",
-      "reason": "Footer content is not shown in the truncated LandingPage.tsx diff; the file summary mentions a footer but not the required 2026 copyright text.",
+      "requirement": "Render the UPI + review section with heading \"Scan to Pay (UPI)\", the exact api.qrserver.com QR image URL from the snippet, the text \"UPI ID: jrg7311@okicici\", and the review link to https://share.google/CAZwztDsnRKHBaOAM.",
+      "reason": "Although constants for qrCodeUrl, upiId, and reviewUrl are present, the actual rendered UPI/review section (including exact user-facing copy and link usage) is not visible in the truncated diff.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (truncated)",
-        "frontend-file-summaries.txt"
+        "frontend/src/components/LandingPage.tsx (constants shown but render section not visible due to truncation)"
       ]
     },
     {
-      "id": "REQ-5",
-      "requirement": "Use the QR generator URL exactly as provided (including size=180x180 and the full data query string).",
-      "reason": "The QR code URL usage is not visible in the truncated LandingPage.tsx diff, so exact URL preservation cannot be confirmed.",
+      "id": "REQ-1",
+      "requirement": "Keep the floating WhatsApp button at bottom-right linking to https://wa.me/918000262644.",
+      "reason": "No floating button markup is visible in the truncated LandingPage.tsx diff, so it cannot be verified.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (truncated)"
+        "frontend/src/components/LandingPage.tsx (truncated before any floating action button section)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Updated SEO metadata in frontend/index.html (title/description/keywords/author).",
-      "reason": "Not requested by any REQ; scope is limited to LandingPage refactor and UPI fade-in with asset handling.",
+      "description": "Updated/expanded project metadata and feature descriptions unrelated to the landing page UI change.",
+      "reason": "BuildRequest only asks to update LandingPage.tsx UI and replace FontAwesome icons; it does not request changes to project state tracking/summary.",
       "evidence": [
-        "frontend-file-summaries.txt (mentions frontend/index.html updated SEO metadata)"
+        "project_state.json (truncated)"
       ]
     },
     {
-      "description": "Extended Tailwind theme with custom OKLCH color tokens (navy-blue/whatsapp) and other theme additions beyond the fade-in requirement.",
-      "reason": "Not requested; only a subtle UPI fade-in behavior was required (which could be implemented without broad theme token additions).",
+      "description": "Edited frontend-file-summaries.txt to describe additional UI/animation/SEO changes not requested in the BuildRequest.",
+      "reason": "BuildRequest does not ask to update documentation/summary files, and the summary text references changes (e.g., global styles, tailwind config, SEO metadata, animations) that are not part of the stated requirements.",
       "evidence": [
-        "frontend/tailwind.config.js (truncated shows new colors: navy-blue, whatsapp)",
         "frontend-file-summaries.txt"
-      ]
-    },
-    {
-      "description": "Footer includes \"caffeine.ai attribution\" (as described in the file summary).",
-      "reason": "REQ-1 requires the footer copyright text for 2026 as in the snippet; adding other attribution text is not requested and may violate the 'match snippet' requirement.",
-      "evidence": [
-        "frontend-file-summaries.txt (LandingPage footer described as having caffeine.ai attribution)"
       ]
     }
   ],
-  "confidence": 0.58,
+  "confidence": 0.62,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/components/LandingPage.tsx",
-    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

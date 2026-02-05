@@ -1,111 +1,62 @@
 {
   "kind": "build_request",
-  "title": "Update landing page to simplified rate list + UPI payment layout (English text) with subtle UPI fade-in",
+  "title": "Update landing page UI to match provided MAGICAL SERVICE HTML layout",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Refactor `frontend/src/components/LandingPage.tsx` to match the structure and styling of the user-provided HTML snippet: a minimal single-page layout containing (1) a sticky top navigation bar with logo + brand text and a call button, (2) a two-card services rate list section (Cleaning and AC Service), (3) a centered UPI payment section with QR code + UPI ID + service area caption, and (4) a simple footer. Remove or hide the existing extra marketing sections (hero, estimator, booking form, maps, testimonials, floating WhatsApp button, etc.) so the page renders primarily the new simplified layout.",
+      "text": "Update `frontend/src/components/LandingPage.tsx` to match the structure, layout, Tailwind classes, and user-facing copy from the provided HTML snippet: sticky top navbar with text-only brand (\"MAGICAL SERVICE\" + \"Ahmedabad & Gandhinagar\") and a phone CTA; add a hero section (blue background) with heading \"Professional Cleaning Service\", subheading \"Trusted Experts in Ahmedabad & Gandhinagar\", and a primary \"WhatsApp Inquiry\" button linking to `https://wa.me/918000262644`; then render the \"Our Service Rates\" section with an underlined title and four service-rate cards (Sofa/AC Jet/Mattress/Carpet-Chair) using the same rounded corners, borders, and hover translate/transition behavior as the snippet; then render the 3-item benefits strip with the same mobile border-top behavior; then render the UPI + review section with \"Scan to Pay (UPI)\", QR image URL exactly as provided, and \"UPI ID: jrg7311@okicici\"; keep the floating WhatsApp button at bottom-right linking to `https://wa.me/918000262644`.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "<nav class=\"bg-white shadow-lg sticky top-0 z-50 p-4\">",
-          "<h3 class=\"text-2xl font-black mb-6 text-orange-800 ...\">Cleaning</h3>",
-          "<h3 class=\"text-xl font-bold text-blue-900 mb-4\">Pay Online via UPI</h3>",
-          "© 2026 Magical Service - Professional Cleaning Experts"
+          "<h1 class=\"text-2xl font-black text-blue-900 leading-none\">MAGICAL SERVICE</h1>",
+          "<p class=\"text-[10px] font-bold text-orange-600 tracking-widest uppercase mt-1\">Ahmedabad & Gandhinagar</p>",
+          "<section class=\"py-12 bg-blue-900 text-white text-center px-4\">",
+          "<h2 class=\"text-4xl font-black text-slate-900 mb-2 underline decoration-blue-500 underline-offset-8\">Our Service Rates</h2>",
+          "<h3 class=\"font-black text-blue-900 mb-4 uppercase\">Scan to Pay (UPI)</h3>",
+          "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service"
         ]
       },
       "acceptanceCriteria": [
-        "The landing page renders only the sections represented in the provided snippet: navbar, rate list, UPI payment, footer (no large hero/estimator/maps/testimonials/booking sections).",
-        "Navbar remains sticky (`sticky top-0 z-50`) with a tel: link using `+918000262644` and visible label `80002 62644`.",
-        "The rate list shows two cards (Cleaning and AC Service) with the exact line items and prices shown in the snippet.",
-        "The UPI section shows the QR image and UPI ID exactly as in the snippet (including the UPI ID `jrg7311@okicici`).",
-        "The footer displays the copyright text for 2026 as in the snippet."
+        "Landing page renders the navbar, hero, service rates grid, benefits strip, UPI/review section, and WhatsApp floating button in the same order as the provided HTML snippet.",
+        "All user-facing text matches the provided snippet exactly (including capitalization for headings like \"MAGICAL SERVICE\" and \"Scan to Pay (UPI)\").",
+        "Links match the snippet exactly: phone uses `tel:+918000262644`, WhatsApp uses `https://wa.me/918000262644`, review uses `https://share.google/CAZwztDsnRKHBaOAM`.",
+        "Service cards have hover lift behavior consistent with the snippet (`hover:-translate-y-2` and transition).",
+        "UPI QR image uses the exact external `api.qrserver.com` URL from the snippet and displays the UPI ID text as \"UPI ID: jrg7311@okicici\"."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Convert all non-English user-facing strings in the provided snippet to English in the updated React page (keep all phone number, UPI ID, and pricing values unchanged). Specifically replace the Gujarati heading/subheading in the rate list section with clear English equivalents.",
+      "text": "Replace any FontAwesome `<i class=\"...\">` icon usage implied by the provided HTML with the existing project icon approach (e.g., `lucide-react` and/or `react-icons` already used in `LandingPage.tsx`), while keeping the visual intent (phone icon, WhatsApp icon, sofa/snowflake/bed/rug-like icons, shield/bolt/wallet-like icons).",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "<h2 class=\"text-3xl font-bold text-slate-800 mb-2\">અમારી ખાસ સેવાઓ અને રેટ લિસ્ટ</h2>",
-          "<p class=\"text-blue-600 font-bold italic\">અમદાવાદ અને ગાંધીનગરમાં સૌથી વ્યાજબી ભાવ</p>"
+          "<i class=\"fas fa-phone-alt\"></i>",
+          "<i class=\"fab fa-whatsapp text-xl\"></i>",
+          "<i class=\"fas fa-couch text-3xl text-blue-600\"></i>"
         ]
       },
       "acceptanceCriteria": [
-        "No Gujarati (or other non-English) text is visible on the landing page after the update.",
-        "The rate list section heading/subheading are in English and communicate the same meaning (services + rate list; affordable pricing in Ahmedabad & Gandhinagar)."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Implement a subtle soft fade-in animation for the UPI payment box (the card that contains the QR code and UPI ID). The animation should trigger on initial render (or when the section scrolls into view) and must not rely on external libraries not already present in the project.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "want to add a soft fade‑in on the UPI payment box for a bit more polish?"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The UPI payment card visibly fades in (opacity/translate) in a subtle way without jarring motion.",
-        "Animation does not break layout and remains accessible (no essential information hidden permanently)."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Avoid Font Awesome `<i class=\"fas ...\">` usage from the snippet in the React implementation; use existing icon tooling already in the codebase (e.g., `lucide-react` Phone icon) while keeping the visual intent of a phone icon next to the call-to-action.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "<i class=\"fas fa-phone-alt mr-1\"></i> 80002 62644"
-        ]
-      },
-      "acceptanceCriteria": [
-        "No Font Awesome dependency is introduced and no `<i class=\"fas ...\">` remains in the React code.",
-        "The call button still includes a phone icon and the phone number label."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Preserve the user-provided external asset URLs exactly where used in the snippet, including the logo URL `https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png` and the QR generator URL `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR`. Ensure the logo has a working fallback behavior in React when the logo fails to load (fallback to `https://img.icons8.com/color/96/000000/cleaning-service.png`).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "src=\"https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png\"",
-          "onerror=\"this.src='https://img.icons8.com/color/96/000000/cleaning-service.png'\"",
-          "src=\"https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR\""
-        ]
-      },
-      "acceptanceCriteria": [
-        "The page uses the QR URL with `size=180x180` exactly as provided.",
-        "If the logo URL fails, the logo displays the icons8 fallback image."
+        "No FontAwesome dependency is introduced for this change.",
+        "All icons render without runtime errors and are visually representative of the intended meaning (phone, WhatsApp, service icons, benefit icons)."
       ]
     }
   ],
   "constraints": [
-    "Frontend immutable paths must not be edited: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, and anything under `frontend/src/components/ui`.",
-    "Backend must remain single-actor architecture; no backend changes are required for this request."
+    "Use English for all user-facing text.",
+    "Do not edit any files under `frontend/src/components/ui` (read-only shadcn/ui components).",
+    "Do not edit any paths listed in `SYSTEM_CONTEXT.frontend.immutablePaths`."
   ],
   "nonGoals": [
-    "Do not add or change Internet Identity authentication behavior.",
-    "Do not add new booking flows, WhatsApp redirects, Google Maps embeds, testimonials, or AI price estimator features beyond what is necessary to match the provided simplified snippet.",
-    "Do not introduce new icon libraries (e.g., Font Awesome)."
+    "Do not add or modify backend (Motoko) canister logic.",
+    "Do not add new authentication flows or change Internet Identity integration.",
+    "Do not add external third-party messaging integrations beyond the existing WhatsApp link URLs."
   ],
   "imageRequirements": {
     "required": [],

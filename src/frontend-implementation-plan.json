@@ -1,88 +1,38 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Simplify LandingPage to rate list + UPI payment layout with subtle fade-in",
+  "title": "Align Landing Page UI with MAGICAL SERVICE HTML Layout",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Refactor LandingPage into the simplified single-page layout (sticky navbar, two-card rate list, centered UPI payment section, simple footer) and remove/hide all other existing marketing sections.",
+      "summary": "Update LandingPage to match the provided MAGICAL SERVICE HTML structure, Tailwind styling, copy, and link targets (navbar, hero, rates, benefits, UPI/review, WhatsApp FAB).",
       "acceptanceCriteria": [
-        "The landing page renders only the sections represented in the provided snippet: navbar, rate list, UPI payment, footer (no large hero/estimator/maps/testimonials/booking sections).",
-        "Navbar remains sticky (`sticky top-0 z-50`) with a tel: link using `+918000262644` and visible label `80002 62644`.",
-        "The rate list shows two cards (Cleaning and AC Service) with the exact line items and prices shown in the snippet.",
-        "The UPI section shows the QR image and UPI ID exactly as in the snippet (including the UPI ID `jrg7311@okicici`).",
-        "The footer displays the copyright text for 2026 as in the snippet."
+        "Landing page renders the navbar, hero, service rates grid, benefits strip, UPI/review section, and WhatsApp floating button in the same order as the provided HTML snippet.",
+        "All user-facing text matches the provided snippet exactly (including capitalization for headings like \"MAGICAL SERVICE\" and \"Scan to Pay (UPI)\").",
+        "Links match the snippet exactly: phone uses `tel:+918000262644`, WhatsApp uses `https://wa.me/918000262644`, review uses `https://share.google/CAZwztDsnRKHBaOAM`.",
+        "Service cards have hover lift behavior consistent with the snippet (`hover:-translate-y-2` and transition).",
+        "UPI QR image uses the exact external `api.qrserver.com` URL from the snippet and displays the UPI ID text as \"UPI ID: jrg7311@okicici\"."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/LandingPage.tsx",
           "operation": "modify",
-          "description": "Rewrite the component structure to match the provided minimal HTML snippet: sticky top navbar (logo + brand + call button), services rate list section with exactly two cards (Cleaning, AC Service) and exact line items/prices from the snippet, centered UPI payment section, and a simple footer; remove/hide existing sections (hero, services grid, AI estimator, booking form, maps, testimonials, floating WhatsApp button, etc.) so only the simplified layout renders."
+          "description": "Restructure the landing page JSX to follow the provided HTML snippet order and layout: (1) sticky top navbar with text-only brand \"MAGICAL SERVICE\" and \"Ahmedabad & Gandhinagar\" plus phone CTA linking to `tel:+918000262644`; (2) add the blue hero section with heading \"Professional Cleaning Service\", subheading \"Trusted Experts in Ahmedabad & Gandhinagar\", and primary \"WhatsApp Inquiry\" button linking to `https://wa.me/918000262644`; (3) render the \"Our Service Rates\" section with underlined title and four service-rate cards (Sofa/AC Jet/Mattress/Carpet-Chair) using the snippet’s rounded corners, borders, and hover translate/transition behavior; (4) render the 3-item benefits strip including the snippet’s mobile border-top behavior; (5) render the UPI + review section with heading \"Scan to Pay (UPI)\", QR image using the exact provided URL, and the text \"UPI ID: jrg7311@okicici\", plus the Google review link button to `https://share.google/CAZwztDsnRKHBaOAM`; keep the floating WhatsApp button fixed bottom-right linking to `https://wa.me/918000262644`."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Ensure all user-facing strings on the updated landing page are English (keeping phone number, UPI ID, and prices unchanged), including replacing the Gujarati heading/subheading from the snippet with English equivalents.",
+      "summary": "Replace any FontAwesome `<i class=\"...\">` icon usage implied by the HTML with existing project icon libraries while preserving visual intent.",
       "acceptanceCriteria": [
-        "No Gujarati (or other non-English) text is visible on the landing page after the update.",
-        "The rate list section heading/subheading are in English and communicate the same meaning (services + rate list; affordable pricing in Ahmedabad & Gandhinagar)."
+        "No FontAwesome dependency is introduced for this change.",
+        "All icons render without runtime errors and are visually representative of the intended meaning (phone, WhatsApp, service icons, benefit icons)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/LandingPage.tsx",
           "operation": "modify",
-          "description": "Update/verify all visible copy is English-only, specifically replacing the Gujarati rate-list heading/subheading from the snippet with clear English equivalents while keeping phone number, UPI ID, and all pricing values unchanged; ensure removed sections do not leave any residual Gujarati text in the rendered output."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Add a subtle, accessible soft fade-in animation to the UPI payment card without introducing new external libraries.",
-      "acceptanceCriteria": [
-        "The UPI payment card visibly fades in (opacity/translate) in a subtle way without jarring motion.",
-        "Animation does not break layout and remains accessible (no essential information hidden permanently)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Add a lightweight custom Tailwind keyframe + animation (opacity + small translate) suitable for a subtle UPI-card entrance; ensure it can be conditionally applied with motion-safe behavior."
-        },
-        {
-          "path": "frontend/src/components/LandingPage.tsx",
-          "operation": "modify",
-          "description": "Implement UPI payment card fade-in behavior on initial render or when scrolled into view using built-in browser capabilities (e.g., IntersectionObserver + React state) and apply the custom Tailwind animation class; ensure content remains accessible and does not remain permanently hidden."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Avoid Font Awesome <i class=\"fas ...\"> usage and use existing icon tooling for the call button while preserving a phone-icon visual intent.",
-      "acceptanceCriteria": [
-        "No Font Awesome dependency is introduced and no `<i class=\"fas ...\">` remains in the React code.",
-        "The call button still includes a phone icon and the phone number label."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/LandingPage.tsx",
-          "operation": "modify",
-          "description": "Ensure the call-to-action button uses existing icon tooling already present in the codebase (e.g., lucide-react Phone) and contains the phone icon alongside the `80002 62644` label, with no Font Awesome `<i class=\"fas ...\">` usage."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Preserve the external logo and QR URLs exactly as provided and implement robust logo fallback behavior in React if the primary logo fails to load.",
-      "acceptanceCriteria": [
-        "The page uses the QR URL with `size=180x180` exactly as provided.",
-        "If the logo URL fails, the logo displays the icons8 fallback image."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/LandingPage.tsx",
-          "operation": "modify",
-          "description": "Wire the external assets exactly as in the snippet: logo `https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png`, QR `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR`; implement React image fallback so that if the logo fails to load it switches to `https://img.icons8.com/color/96/000000/cleaning-service.png`."
+          "description": "Ensure all icons used for phone/WhatsApp, service-rate cards, and benefits are implemented via the existing icon approach already present in the project (e.g., `lucide-react` and `react-icons`) and that no FontAwesome `<i class=\"...\">` usage or new FontAwesome dependency is added."
         }
       ]
     }
