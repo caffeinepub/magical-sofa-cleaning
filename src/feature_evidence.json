@@ -2,8 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-implement-a-new-service-areas-section-on-the-landing-page-frontend-src-components-landingpage-tsx-that-matches-the-structure-and-tailwind-styling-provided-by-the-user-s-html-snippet-section-wrapper-py-16-bg-white-container-layout-a-centered-h2-title-and-a-responsive-2-column-grid-containing-two-area-cards-ahmedabad-and-gandhinagar-each-with-a-title-row-and-an-inner-responsive-grid-list-of-locality-span-items",
-      "featureTitle": "Implement a new “Service Areas” section on the landing page (frontend/src/components/LandingPage.tsx) that matches the structure and Tailwind styling provided by the user’s HTML snippet: section wrapper (py-16 bg-white), container layout, a centered H2 title, and a responsive 2-column grid containing two area cards (Ahmedabad and Gandhinagar) each with a title row and an inner responsive grid list of locality <span> items.",
+      "featureId": "feature-refactor-frontend-src-components-landingpage-tsx-to-match-the-structure-and-styling-of-the-user-provided-html-snippet-a-minimal-single-page-layout-containing-1-a-sticky-top-navigation-bar-with-logo-brand-text-and-a-call-button-2-a-two-card-services-rate-list-section-cleaning-and-ac-service-3-a-centered-upi-payment-section-with-qr-code-upi-id-service-area-caption-and-4-a-simple-footer-remove-or-hide-the-existing-extra-marketing-sections-hero-estimator-booking-form-maps-testimonials-floating-whatsapp-button-etc-so-the-page-renders-primarily-the-new-simplified-layout",
+      "featureTitle": "Refactor `frontend/src/components/LandingPage.tsx` to match the structure and styling of the user-provided HTML snippet: a minimal single-page layout containing (1) a sticky top navigation bar with logo + brand text and a call button, (2) a two-card services rate list section (Cleaning and AC Service), (3) a centered UPI payment section with QR code + UPI ID + service area caption, and (4) a simple footer. Remove or hide the existing extra marketing sections (hero, estimator, booking form, maps, testimonials, floating WhatsApp button, etc.) so the page renders primarily the new simplified layout.",
       "files": [
         "frontend/src/components/LandingPage.tsx"
       ],
@@ -20,8 +20,8 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-preserve-the-exact-service-areas-content-from-the-user-s-snippet-including-gujarati-locality-names-and-the-existing-parenthetical-english-descriptors-like-service-areas-all-over-ahmedabad-and-all-over-gandhinagar-and-include-the-concluding-italic-note-line-exactly-as-provided",
-      "featureTitle": "Preserve the exact Service Areas content from the user’s snippet (including Gujarati locality names and the existing parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, and “(All Over Gandhinagar)”), and include the concluding italic note line exactly as provided.",
+      "featureId": "feature-convert-all-non-english-user-facing-strings-in-the-provided-snippet-to-english-in-the-updated-react-page-keep-all-phone-number-upi-id-and-pricing-values-unchanged-specifically-replace-the-gujarati-heading-subheading-in-the-rate-list-section-with-clear-english-equivalents",
+      "featureTitle": "Convert all non-English user-facing strings in the provided snippet to English in the updated React page (keep all phone number, UPI ID, and pricing values unchanged). Specifically replace the Gujarati heading/subheading in the rate list section with clear English equivalents.",
       "files": [
         "frontend/src/components/LandingPage.tsx"
       ],
@@ -38,8 +38,27 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-replace-the-snippet-s-font-awesome-icon-usage-i-class-fas-fa-map-marker-alt-with-an-equivalent-icon-approach-already-used-in-the-project-e-g-a-lucide-react-map-pin-icon-while-keeping-the-same-visual-placement-icon-to-the-left-of-each-city-heading-do-not-add-font-awesome-as-a-dependency",
-      "featureTitle": "Replace the snippet’s Font Awesome icon usage (<i class=\"fas fa-map-marker-alt\">) with an equivalent icon approach already used in the project (e.g., a lucide-react map/pin icon), while keeping the same visual placement (icon to the left of each city heading). Do not add Font Awesome as a dependency.",
+      "featureId": "feature-implement-a-subtle-soft-fade-in-animation-for-the-upi-payment-box-the-card-that-contains-the-qr-code-and-upi-id-the-animation-should-trigger-on-initial-render-or-when-the-section-scrolls-into-view-and-must-not-rely-on-external-libraries-not-already-present-in-the-project",
+      "featureTitle": "Implement a subtle soft fade-in animation for the UPI payment box (the card that contains the QR code and UPI ID). The animation should trigger on initial render (or when the section scrolls into view) and must not rely on external libraries not already present in the project.",
+      "files": [
+        "frontend/src/components/LandingPage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-avoid-font-awesome-i-class-fas-usage-from-the-snippet-in-the-react-implementation-use-existing-icon-tooling-already-in-the-codebase-e-g-lucide-react-phone-icon-while-keeping-the-visual-intent-of-a-phone-icon-next-to-the-call-to-action",
+      "featureTitle": "Avoid Font Awesome `<i class=\"fas ...\">` usage from the snippet in the React implementation; use existing icon tooling already in the codebase (e.g., `lucide-react` Phone icon) while keeping the visual intent of a phone icon next to the call-to-action.",
       "files": [
         "frontend/src/components/LandingPage.tsx"
       ],
@@ -51,7 +70,25 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-3"
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-preserve-the-user-provided-external-asset-urls-exactly-where-used-in-the-snippet-including-the-logo-url-https-magical-sofa-cleaning-7pe-caffeine-xyz-logo-png-and-the-qr-generator-url-https-api-qrserver-com-v1-create-qr-code-size-180x180-data-upi-pay-pa-jrg7311-okicici-pn-magical-20service-cu-inr-ensure-the-logo-has-a-working-fallback-behavior-in-react-when-the-logo-fails-to-load-fallback-to-https-img-icons8-com-color-96-000000-cleaning-service-png",
+      "featureTitle": "Preserve the user-provided external asset URLs exactly where used in the snippet, including the logo URL `https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png` and the QR generator URL `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR`. Ensure the logo has a working fallback behavior in React when the logo fails to load (fallback to `https://img.icons8.com/color/96/000000/cleaning-service.png`).",
+      "files": [
+        "frontend/src/components/LandingPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
       ],
       "confidence": "high"
     }

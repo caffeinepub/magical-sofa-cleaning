@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 25,
-  "summary": "Project includes a full ICP canister template app (Motoko backend + React/Vite frontend with shadcn/ui, Internet Identity auth hooks, typed actor bindings, and build/deploy tooling) alongside an enhanced Gujarati cleaning-service landing page featuring updated SEO meta tags, WhatsApp/call CTAs, embedded Google Maps location section, Google Review CTA, customer testimonials/trust highlights, and detailed service-areas coverage for Ahmedabad & Gandhinagar.",
+  "projectStateVersion": 101,
+  "summary": "Project includes a full ICP canister template app (Motoko backend + React/Vite frontend with shadcn/ui, Internet Identity auth hooks, typed actor bindings, and build/deploy tooling) and an evolving Magical Service sofa/AC cleaning landing site that now incorporates rich marketing sections (service grid, service areas, Google Maps embed, reviews + Google review CTA, social/contact links), WhatsApp-based booking form, pricing/rate list sections, AI-style price estimator UI, and a UPI QR payment section.",
   "existing_features": [
     {
       "id": "IF-1",
@@ -66,59 +66,147 @@
       "version": 1
     },
     {
-      "id": "feature-implement-a-new-service-areas-section-on-the-landing-page-frontend-src-components-landingpage-tsx-that-matches-the-structure-and-tailwind-styling-provided-by-the-user-s-html-snippet-section-wrapper-py-16-bg-white-container-layout-a-centered-h2-title-and-a-responsive-2-column-grid-containing-two-area-cards-ahmedabad-and-gandhinagar-each-with-a-title-row-and-an-inner-responsive-grid-list-of-locality-span-items",
-      "title": "Implement a new “Service Areas” section on the landing page (frontend/src/components/LandingPage.tsx) that matches the structure and Tailwind styling provided by the user’s HTML snippet: section wrapper (py-16 bg-white), container layout, a centered H2 title, and a responsive 2-column grid containing two area cards (Ahmedabad and Gandhinagar) each with a title row and an inner responsive grid list of locality <span> items.",
+      "id": "IF-6",
+      "title": "Client-side StorageClient utility for persisted app state",
+      "synonyms": [
+        "localStorage wrapper",
+        "storage abstraction",
+        "persistent client storage"
+      ],
+      "description": "Adds a frontend StorageClient utility to standardize reading/writing persisted client state (e.g., auth/session-related data) in a typed, reusable way.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-7",
+      "title": "Sofa/AC cleaning service landing page UI",
+      "synonyms": [
+        "marketing landing page",
+        "service homepage",
+        "LandingPage component"
+      ],
+      "description": "Implements the cleaning service marketing/landing page UI in the React frontend (e.g., hero/branding sections and overall page layout), integrating the generated brand/hero images and the app shell.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "feature-refactor-frontend-src-components-landingpage-tsx-to-match-the-structure-and-styling-of-the-user-provided-html-snippet-a-minimal-single-page-layout-containing-1-a-sticky-top-navigation-bar-with-logo-brand-text-and-a-call-button-2-a-two-card-services-rate-list-section-cleaning-and-ac-service-3-a-centered-upi-payment-section-with-qr-code-upi-id-service-area-caption-and-4-a-simple-footer-remove-or-hide-the-existing-extra-marketing-sections-hero-estimator-booking-form-maps-testimonials-floating-whatsapp-button-etc-so-the-page-renders-primarily-the-new-simplified-layout",
+      "title": "Refactor `frontend/src/components/LandingPage.tsx` to match the structure and styling of the user-provided HTML snippet: a minimal single-page layout containing (1) a sticky top navigation bar with logo + brand text and a call button, (2) a two-card services rate list section (Cleaning and AC Service), (3) a centered UPI payment section with QR code + UPI ID + service area caption, and (4) a simple footer. Remove or hide the existing extra marketing sections (hero, estimator, booking form, maps, testimonials, floating WhatsApp button, etc.) so the page renders primarily the new simplified layout.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-preserve-the-exact-service-areas-content-from-the-user-s-snippet-including-gujarati-locality-names-and-the-existing-parenthetical-english-descriptors-like-service-areas-all-over-ahmedabad-and-all-over-gandhinagar-and-include-the-concluding-italic-note-line-exactly-as-provided",
-      "title": "Preserve the exact Service Areas content from the user’s snippet (including Gujarati locality names and the existing parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, and “(All Over Gandhinagar)”), and include the concluding italic note line exactly as provided.",
+      "id": "feature-convert-all-non-english-user-facing-strings-in-the-provided-snippet-to-english-in-the-updated-react-page-keep-all-phone-number-upi-id-and-pricing-values-unchanged-specifically-replace-the-gujarati-heading-subheading-in-the-rate-list-section-with-clear-english-equivalents",
+      "title": "Convert all non-English user-facing strings in the provided snippet to English in the updated React page (keep all phone number, UPI ID, and pricing values unchanged). Specifically replace the Gujarati heading/subheading in the rate list section with clear English equivalents.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-replace-the-snippet-s-font-awesome-icon-usage-i-class-fas-fa-map-marker-alt-with-an-equivalent-icon-approach-already-used-in-the-project-e-g-a-lucide-react-map-pin-icon-while-keeping-the-same-visual-placement-icon-to-the-left-of-each-city-heading-do-not-add-font-awesome-as-a-dependency",
-      "title": "Replace the snippet’s Font Awesome icon usage (<i class=\"fas fa-map-marker-alt\">) with an equivalent icon approach already used in the project (e.g., a lucide-react map/pin icon), while keeping the same visual placement (icon to the left of each city heading). Do not add Font Awesome as a dependency.",
+      "id": "feature-implement-a-subtle-soft-fade-in-animation-for-the-upi-payment-box-the-card-that-contains-the-qr-code-and-upi-id-the-animation-should-trigger-on-initial-render-or-when-the-section-scrolls-into-view-and-must-not-rely-on-external-libraries-not-already-present-in-the-project",
+      "title": "Implement a subtle soft fade-in animation for the UPI payment box (the card that contains the QR code and UPI ID). The animation should trigger on initial render (or when the section scrolls into view) and must not rely on external libraries not already present in the project.",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-avoid-font-awesome-i-class-fas-usage-from-the-snippet-in-the-react-implementation-use-existing-icon-tooling-already-in-the-codebase-e-g-lucide-react-phone-icon-while-keeping-the-visual-intent-of-a-phone-icon-next-to-the-call-to-action",
+      "title": "Avoid Font Awesome `<i class=\"fas ...\">` usage from the snippet in the React implementation; use existing icon tooling already in the codebase (e.g., `lucide-react` Phone icon) while keeping the visual intent of a phone icon next to the call-to-action.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-preserve-the-user-provided-external-asset-urls-exactly-where-used-in-the-snippet-including-the-logo-url-https-magical-sofa-cleaning-7pe-caffeine-xyz-logo-png-and-the-qr-generator-url-https-api-qrserver-com-v1-create-qr-code-size-180x180-data-upi-pay-pa-jrg7311-okicici-pn-magical-20service-cu-inr-ensure-the-logo-has-a-working-fallback-behavior-in-react-when-the-logo-fails-to-load-fallback-to-https-img-icons8-com-color-96-000000-cleaning-service-png",
+      "title": "Preserve the user-provided external asset URLs exactly where used in the snippet, including the logo URL `https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png` and the QR generator URL `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR`. Ensure the logo has a working fallback behavior in React when the logo fails to load (fallback to `https://img.icons8.com/color/96/000000/cleaning-service.png`).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
     }
   ],
-  "new_feature_requests": [],
+  "new_feature_requests": [
+    {
+      "id": "AR-2",
+      "summary": "Add WhatsApp-based online booking form (collect name, service, area) and redirect to WhatsApp with prefilled message",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add Google Maps location/embed section for service location + service coverage text",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add customer reviews/trust section and Google Review CTA link section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add service areas section listing neighborhoods/coverage for Ahmedabad and Gandhinagar",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add pricing/rate list section for Cleaning + AC services",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add UPI payment section with QR code + UPI ID + direct UPI deep link",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add Local Business structured data (JSON-LD) for improved local SEO",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
   "architectural_notes": [
     "Project scaffold expanded to a full ICP template: Motoko backend canister and React/Vite frontend, with canister YAML configs and generated DID/type bindings.",
     "Frontend authentication includes Internet Identity support with dedicated hooks/utilities and linting rules enforcing provider usage.",
     "UI stack includes Tailwind + shadcn/ui with a broad set of prebuilt UI primitives added under frontend src/components/ui.",
     "Repository now contains build-template tooling (Dockerfile, workspace configs, image resize/prune scripts, deploy script) to standardize build/deploy.",
     "A standalone reusable ICP app template is maintained under build-template/ (Dockerfile, deploy tooling, backend/frontend canister YAMLs, ESLint rules, shadcn/ui primitives), mirroring the main project structure for standardized export/reuse.",
-    "Service landing page includes WhatsApp deep links (wa.me) for inquiries plus tel: links for click-to-call CTAs.",
-    "Service landing page embeds Google Maps via iframe for location display.",
-    "Service landing page includes a Google Review CTA section linking to a review URL (g.page).",
-    "Service landing page includes customer testimonial/trust sections and a detailed Service Areas section listing Ahmedabad and Gandhinagar localities."
+    "Build-template packaging/export readiness improved: includes LICENSE/README, pnpm workspace/package configs, and icp.yaml/deploy tooling to support standardized reuse/export (e.g., via GitHub/ICP CLI workflows).",
+    "Frontend now includes a StorageClient utility to centralize and standardize client-side persisted state access (e.g., local/session storage) for hooks/utilities.",
+    "Frontend/build-template linting expanded with a dedicated ESLint rule to prevent using BigInt values in query keys (avoids caching/serialization pitfalls in query libraries).",
+    "Frontend now includes a dedicated LandingPage component and app wiring (App/main/index.html/css) to render the sofa/AC cleaning service landing page within the ICP React/Vite template.",
+    "Landing page is being expanded with multiple standalone marketing sections (booking via WhatsApp redirect, pricing cards, UPI QR payment, reviews/Google review CTA, service areas, map embed, social links) that should be modularized into reusable components."
   ],
-  "known_issues": [],
+  "known_issues": [
+    "Publishing domain validation error observed: \"Domain Magical_sofa_cleaning.xyx must be between 5 and 50 characters and contain only letters, numbers, and hyphens.\"",
+    "Safety/security filter blocks occurred during an update (prompt red-flagged), which may interrupt deployment automation.",
+    "Draft app expiration occurred (\"Your draft app has expired. Do you want to rebuild it?\") indicating deployment lifecycle/TTL needs handling."
+  ],
   "isFixRequest": false,
   "generatedImages": [
     {
-      "filename": "frontend/public/assets/generated/hero-sofa-cleaning.dim_1920x900.jpg",
-      "description": "Generated hero/banner image for the sofa cleaning landing page.",
-      "targetWidth": 1920,
-      "targetHeight": 900
+      "filename": "frontend/public/assets/generated/magical-service-logo-uploaded.dim_128x128.png",
+      "description": "Uploaded/replacement variant of the service logo (128x128) added to generated assets.",
+      "targetWidth": 128,
+      "targetHeight": 128
     },
     {
-      "filename": "frontend/public/assets/generated/magical-service-logo.dim_512x512.png",
-      "description": "Generated logo/brand image for the service.",
+      "filename": "frontend/public/assets/generated/magical-service-logo-uploaded.dim_512x512.png",
+      "description": "Uploaded/replacement variant of the service logo (512x512) added to generated assets.",
       "targetWidth": 512,
       "targetHeight": 512
     }
   ],
-  "projectName": "Add detailed Service Areas section (Ahmedabad + Gandhinagar) to landing page",
+  "projectName": "Magical Service",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

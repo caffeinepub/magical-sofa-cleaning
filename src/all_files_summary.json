@@ -1,15 +1,15 @@
 {
-  "backend/main.mo": "Defines an empty Motoko actor with no methods or state, serving as a placeholder backend canister.",
-  "feature_evidence.json": "Structured report documenting implemented frontend features for the LandingPage Service Areas section, including requirements, affected files, dependencies, and confidence levels.",
-  "frontend-file-summaries.txt": "Prewritten high-level summaries of key frontend files describing application structure, styling, SEO metadata, and the complete LandingPage content.",
-  "frontend/index.css": "Global Tailwind CSS setup defining design tokens (colors, radius, charts, sidebar) using OKLCH values and base background/text styles with light and dark modes.",
-  "frontend/index.html": "HTML entry point that mounts the React app and defines SEO metadata such as title, description, keywords, and author for Magical Service.",
-  "frontend/src/App.tsx": "Root React component that renders the LandingPage as the sole application view.",
-  "frontend/src/components/LandingPage.tsx": "Comprehensive landing page component with navigation, hero, services, Service Areas, testimonials, map embed, footer, and WhatsApp/phone CTAs styled with Tailwind and icon libraries.",
-  "frontend/src/hooks/useActor.ts": "Custom React hook that creates and caches a backend actor based on the current Internet Identity, integrating with React Query for lifecycle and cache invalidation.",
-  "frontend/src/hooks/useInternetIdentity.ts": "Authentication context and provider for Internet Identity, handling login, logout, identity persistence, and login status using DFINITY AuthClient.",
-  "frontend/src/index.css": "Extended global Tailwind CSS with Magical Service brand color tokens (navy blue and WhatsApp), typography defaults, accessibility focus styles, and dark mode support.",
-  "frontend/src/main.tsx": "React application bootstrap that creates the root, wires React Query and InternetIdentity providers, and imports global styles.",
-  "frontend/tailwind.config.js": "Tailwind CSS configuration enabling class-based dark mode, scanning frontend source files, and extending the theme with CSS-variable-driven OKLCH color tokens, layout/container defaults, border radii, shadows, and accordion animations. It also integrates official plugins for typography, container queries, and animations to support shadcn/ui and modern responsive design.",
-  "project_state.json": "Project metadata and state definition describing an ICP canister template app (Motoko backend + React/Vite frontend) alongside a Gujarati cleaning-service landing page. It enumerates existing features, versions, and requirements including SEO, Internet Identity auth, typed canister actors, shadcn/ui integration, build tooling, and detailed service-area content."
+  "backend/main.mo": "Empty Motoko actor with no implemented logic.",
+  "feature_evidence.json": "Feature evidence report listing feature IDs, titles, affected files, and metadata for recent frontend refactors and enhancements.",
+  "frontend-file-summaries.txt": "Text file containing short descriptions of key frontend source files and their roles.",
+  "frontend/index.css": "Tailwind base styles defining global OKLCH color tokens, dark mode variables, and shared utility defaults for the static HTML entrypoint.",
+  "frontend/index.html": "Root HTML file setting SEO metadata and mounting the React app through main.tsx.",
+  "frontend/src/App.tsx": "Main React component that renders the LandingPage component.",
+  "frontend/src/components/LandingPage.tsx": "Landing page with sticky navigation, service rate cards, a UPI payment section with fade‑in animation, and a minimal footer.",
+  "frontend/src/hooks/useActor.ts": "React hook creating and managing an authenticated or anonymous backend actor using React Query.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Context and hooks for Internet Identity authentication, storing identities, and handling login state.",
+  "frontend/src/index.css": "Global Tailwind styles with OKLCH tokens, custom brand colors, font settings, and accessibility focus-visible rules.",
+  "frontend/src/main.tsx": "React entrypoint that mounts the app with InternetIdentityProvider and React Query client.",
+  "frontend/tailwind.config.js": "Configures Tailwind with dark mode, content paths, extended color system via CSS variables, custom radii, shadows, animations, and plugins for typography, container queries, and animations.",
+  "project_state.json": "Defines the project's state metadata and enumerates existing features, including ICP canister integration, Internet Identity auth, shadcn/ui setup, and the cleaning-service landing page components."
 }

@@ -1,47 +1,72 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-04T10:54:37.088Z",
-  "summary": "Diff evidence confirms lucide-react MapPin is imported in LandingPage, but the actual new dedicated “Service Areas” section layout/content required by the HTML snippet cannot be verified from the truncated LandingPage diff. Additionally, the diff shows a “Service Areas” item added to the generic services list, which was not requested (the request was for a dedicated section).",
+  "generatedAt": "2026-02-05T03:53:02.145Z",
+  "summary": "LandingPage.tsx was refactored toward the requested simplified layout (sticky navbar with tel: link, English headings, logo fallback, and IntersectionObserver-based UPI visibility state). However, due to truncation and limited evidence, several snippet-exact requirements (UPI QR URL, full rate list details for both cards, and 2026 footer text) cannot be confirmed. Additionally, unrelated changes appear to have been made (SEO metadata, Tailwind theme token expansion), and the footer may include unrequested attribution.",
   "missing_requirements": [
     {
       "id": "REQ-1",
-      "requirement": "Implement a new “Service Areas” section on the landing page matching the provided snippet structure/styling (section py-16 bg-white > container > centered h2 > responsive 2-column grid with two area cards; inner locality grid uses sm:grid-cols-3).",
-      "reason": "The only provided LandingPage.tsx diff content is truncated before any dedicated Service Areas section markup appears, so the required section structure and Tailwind classes cannot be confirmed from the diff evidence.",
+      "requirement": "Ensure the rate list shows two cards (Cleaning and AC Service) with the exact line items and prices shown in the snippet.",
+      "reason": "The diff for LandingPage.tsx is truncated mid-way through the second card (AC Service), so the exact items/prices cannot be verified from the provided evidence.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (truncated before any Service Areas section markup is shown)"
+        "frontend/src/components/LandingPage.tsx (truncated)"
       ]
     },
     {
-      "id": "REQ-2",
-      "requirement": "Preserve the exact Service Areas content from the user’s snippet (Gujarati locality names + parenthetical English descriptors) and include the concluding italic note line exactly as provided.",
-      "reason": "The truncated diff does not show the locality <span> list content nor the concluding italic note line, so exact text/content preservation cannot be verified.",
+      "id": "REQ-1",
+      "requirement": "UPI section must show the QR image and UPI ID exactly as in the snippet (including UPI ID jrg7311@okicici) and include the service area caption.",
+      "reason": "Only the UPI ID constant is visible; the QR image element and service-area caption are not shown in the truncated diff.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (truncated; no locality lists/note line visible)"
+        "frontend/src/components/LandingPage.tsx (truncated)"
       ]
     },
     {
-      "id": "REQ-3",
-      "requirement": "Replace Font Awesome <i class=\"fas fa-map-marker-alt\"> usage with an equivalent icon approach already used (e.g., lucide-react), and ensure no Font Awesome dependency/usage remains.",
-      "reason": "While MapPin from lucide-react is imported, the diff does not show the city heading markup where the icon should be placed, and provides no evidence about absence of Font Awesome usage/dependencies elsewhere.",
+      "id": "REQ-1",
+      "requirement": "Footer displays the copyright text for 2026 as in the snippet.",
+      "reason": "Footer content is not shown in the truncated LandingPage.tsx diff; the file summary mentions a footer but not the required 2026 copyright text.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (shows `import { Phone, Star, MapPin } from 'lucide-react';` but truncated before city heading markup)"
+        "frontend/src/components/LandingPage.tsx (truncated)",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Use the QR generator URL exactly as provided (including size=180x180 and the full data query string).",
+      "reason": "The QR code URL usage is not visible in the truncated LandingPage.tsx diff, so exact URL preservation cannot be confirmed.",
+      "evidence": [
+        "frontend/src/components/LandingPage.tsx (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added/used a “Service Areas” item inside the generic `services` array (service card content: \"Ahmedabad and Gandhinagar (Nikol, Naroda, Bapunagar and all areas)\").",
-      "reason": "The BuildRequest asked for a dedicated “Service Areas” section matching a specific HTML snippet, not a new entry in the existing services list; this addition is not requested by any REQ.",
+      "description": "Updated SEO metadata in frontend/index.html (title/description/keywords/author).",
+      "reason": "Not requested by any REQ; scope is limited to LandingPage refactor and UPI fade-in with asset handling.",
       "evidence": [
-        "frontend/src/components/LandingPage.tsx (services array includes `{ title: 'Service Areas', description: 'Ahmedabad and Gandhinagar ...', highlight: true }`)"
+        "frontend-file-summaries.txt (mentions frontend/index.html updated SEO metadata)"
+      ]
+    },
+    {
+      "description": "Extended Tailwind theme with custom OKLCH color tokens (navy-blue/whatsapp) and other theme additions beyond the fade-in requirement.",
+      "reason": "Not requested; only a subtle UPI fade-in behavior was required (which could be implemented without broad theme token additions).",
+      "evidence": [
+        "frontend/tailwind.config.js (truncated shows new colors: navy-blue, whatsapp)",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Footer includes \"caffeine.ai attribution\" (as described in the file summary).",
+      "reason": "REQ-1 requires the footer copyright text for 2026 as in the snippet; adding other attribution text is not requested and may violate the 'match snippet' requirement.",
+      "evidence": [
+        "frontend-file-summaries.txt (LandingPage footer described as having caffeine.ai attribution)"
       ]
     }
   ],
-  "confidence": 0.56,
+  "confidence": 0.58,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/components/LandingPage.tsx",
+    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

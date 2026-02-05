@@ -1,18 +1,18 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-04T10:54:37.121Z",
+  "generatedAt": "2026-02-05T03:53:02.183Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 5,
+    "implemented": 5,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Implement a new “Service Areas” section on the landing page (frontend/src/components/LandingPage.tsx) that matches the structure and Tailwind styling provided by the user’s HTML snippet: section wrapper (py-16 bg-white), container layout, a centered H2 title, and a responsive 2-column grid containing two area cards (Ahmedabad and Gandhinagar) each with a title row and an inner responsive grid list of locality <span> items.",
+        "summary": "Refactor `frontend/src/components/LandingPage.tsx` to match the structure and styling of the user-provided HTML snippet: a minimal single-page layout containing (1) a sticky top navigation bar with logo + brand text and a call button, (2) a two-card services rate list section (Cleaning and AC Service), (3) a centered UPI payment section with QR code + UPI ID + service area caption, and (4) a simple footer. Remove or hide the existing extra marketing sections (hero, estimator, booking form, maps, testimonials, floating WhatsApp button, etc.) so the page renders primarily the new simplified layout.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/LandingPage.tsx"
@@ -23,7 +23,7 @@
       },
       {
         "id": "REQ-2",
-        "summary": "Preserve the exact Service Areas content from the user’s snippet (including Gujarati locality names and the existing parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, and “(All Over Gandhinagar)”), and include the concluding italic note line exactly as provided.",
+        "summary": "Convert all non-English user-facing strings in the provided snippet to English in the updated React page (keep all phone number, UPI ID, and pricing values unchanged). Specifically replace the Gujarati heading/subheading in the rate list section with clear English equivalents.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/LandingPage.tsx"
@@ -34,7 +34,31 @@
       },
       {
         "id": "REQ-3",
-        "summary": "Replace the snippet’s Font Awesome icon usage (<i class=\"fas fa-map-marker-alt\">) with an equivalent icon approach already used in the project (e.g., a lucide-react map/pin icon), while keeping the same visual placement (icon to the left of each city heading). Do not add Font Awesome as a dependency.",
+        "summary": "Implement a subtle soft fade-in animation for the UPI payment box (the card that contains the QR code and UPI ID). The animation should trigger on initial render (or when the section scrolls into view) and must not rely on external libraries not already present in the project.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/tailwind.config.js",
+          "frontend/src/components/LandingPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/tailwind.config.js",
+          "frontend/src/components/LandingPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Avoid Font Awesome `<i class=\"fas ...\">` usage from the snippet in the React implementation; use existing icon tooling already in the codebase (e.g., `lucide-react` Phone icon) while keeping the visual intent of a phone icon next to the call-to-action.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/LandingPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/LandingPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Preserve the user-provided external asset URLs exactly where used in the snippet, including the logo URL `https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png` and the QR generator URL `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR`. Ensure the logo has a working fallback behavior in React when the logo fails to load (fallback to `https://img.icons8.com/color/96/000000/cleaning-service.png`).",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/LandingPage.tsx"
@@ -51,6 +75,7 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/components/LandingPage.tsx",
+    "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

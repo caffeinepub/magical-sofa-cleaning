@@ -1,51 +1,88 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add Service Areas section (Ahmedabad + Gandhinagar) to landing page",
+  "title": "Simplify LandingPage to rate list + UPI payment layout with subtle fade-in",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Add a new Service Areas section to LandingPage that matches the provided HTML snippet structure and Tailwind layout (section wrapper, container, centered H2, responsive 2-column card grid with inner responsive locality grids).",
+      "summary": "Refactor LandingPage into the simplified single-page layout (sticky navbar, two-card rate list, centered UPI payment section, simple footer) and remove/hide all other existing marketing sections.",
       "acceptanceCriteria": [
-        "LandingPage renders a dedicated Service Areas section with the same layout semantics as the provided snippet (section > container > h2 > 2-column card grid).",
-        "On mobile it displays 1 column; on md+ it displays 2 columns, matching the snippet’s responsive behavior.",
-        "Each card contains an inner grid that becomes 3 columns on small screens (sm:grid-cols-3) as in the snippet."
+        "The landing page renders only the sections represented in the provided snippet: navbar, rate list, UPI payment, footer (no large hero/estimator/maps/testimonials/booking sections).",
+        "Navbar remains sticky (`sticky top-0 z-50`) with a tel: link using `+918000262644` and visible label `80002 62644`.",
+        "The rate list shows two cards (Cleaning and AC Service) with the exact line items and prices shown in the snippet.",
+        "The UPI section shows the QR image and UPI ID exactly as in the snippet (including the UPI ID `jrg7311@okicici`).",
+        "The footer displays the copyright text for 2026 as in the snippet."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/LandingPage.tsx",
           "operation": "modify",
-          "description": "Implement a new “Service Areas” section using the same high-level structure and Tailwind class semantics as the user’s snippet: a section wrapper with py-16 bg-white, a container layout, a centered H2, and a responsive grid (1 col mobile, 2 col md+) of two area cards (Ahmedabad and Gandhinagar). Each card should include a title row and an inner responsive grid of locality <span> items using sm:grid-cols-3. Place the section at an appropriate location in the existing page flow (e.g., near other informational sections) without introducing new routes."
+          "description": "Rewrite the component structure to match the provided minimal HTML snippet: sticky top navbar (logo + brand + call button), services rate list section with exactly two cards (Cleaning, AC Service) and exact line items/prices from the snippet, centered UPI payment section, and a simple footer; remove/hide existing sections (hero, services grid, AI estimator, booking form, maps, testimonials, floating WhatsApp button, etc.) so only the simplified layout renders."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Preserve the exact Gujarati/English Service Areas content from the user snippet, including the concluding italic note line.",
+      "summary": "Ensure all user-facing strings on the updated landing page are English (keeping phone number, UPI ID, and prices unchanged), including replacing the Gujarati heading/subheading from the snippet with English equivalents.",
       "acceptanceCriteria": [
-        "All localities listed in the snippet appear on the page (Ahmedabad list + Gandhinagar list) with no omissions or renaming.",
-        "The concluding note line renders at the bottom of the section with italic styling and the same visible text as the snippet."
+        "No Gujarati (or other non-English) text is visible on the landing page after the update.",
+        "The rate list section heading/subheading are in English and communicate the same meaning (services + rate list; affordable pricing in Ahmedabad & Gandhinagar)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/LandingPage.tsx",
           "operation": "modify",
-          "description": "Copy the Service Areas text content exactly from the user-provided snippet (including Gujarati locality names, the parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, “(All Over Gandhinagar)”, and the concluding italic note line) and render it in the new section with the same visible wording and intended emphasis/italics."
+          "description": "Update/verify all visible copy is English-only, specifically replacing the Gujarati rate-list heading/subheading from the snippet with clear English equivalents while keeping phone number, UPI ID, and all pricing values unchanged; ensure removed sections do not leave any residual Gujarati text in the rendered output."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Replace the snippet’s Font Awesome map-marker icon with an existing in-project icon approach (lucide-react) while keeping the same placement next to each city heading.",
+      "summary": "Add a subtle, accessible soft fade-in animation to the UPI payment card without introducing new external libraries.",
       "acceptanceCriteria": [
-        "Each city heading shows a map-marker style icon aligned inline before the heading text.",
-        "No Font Awesome dependency or <i class=\"fas ...\"> usage remains in the codebase."
+        "The UPI payment card visibly fades in (opacity/translate) in a subtle way without jarring motion.",
+        "Animation does not break layout and remains accessible (no essential information hidden permanently)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Add a lightweight custom Tailwind keyframe + animation (opacity + small translate) suitable for a subtle UPI-card entrance; ensure it can be conditionally applied with motion-safe behavior."
+        },
+        {
+          "path": "frontend/src/components/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Implement UPI payment card fade-in behavior on initial render or when scrolled into view using built-in browser capabilities (e.g., IntersectionObserver + React state) and apply the custom Tailwind animation class; ensure content remains accessible and does not remain permanently hidden."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Avoid Font Awesome <i class=\"fas ...\"> usage and use existing icon tooling for the call button while preserving a phone-icon visual intent.",
+      "acceptanceCriteria": [
+        "No Font Awesome dependency is introduced and no `<i class=\"fas ...\">` remains in the React code.",
+        "The call button still includes a phone icon and the phone number label."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/LandingPage.tsx",
           "operation": "modify",
-          "description": "Use a lucide-react map/pin icon (e.g., MapPin) placed inline to the left of each city heading to match the snippet’s visual placement, and ensure no Font Awesome <i class=\"fas ...\"> usage is introduced."
+          "description": "Ensure the call-to-action button uses existing icon tooling already present in the codebase (e.g., lucide-react Phone) and contains the phone icon alongside the `80002 62644` label, with no Font Awesome `<i class=\"fas ...\">` usage."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Preserve the external logo and QR URLs exactly as provided and implement robust logo fallback behavior in React if the primary logo fails to load.",
+      "acceptanceCriteria": [
+        "The page uses the QR URL with `size=180x180` exactly as provided.",
+        "If the logo URL fails, the logo displays the icons8 fallback image."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Wire the external assets exactly as in the snippet: logo `https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png`, QR `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR`; implement React image fallback so that if the logo fails to load it switches to `https://img.icons8.com/color/96/000000/cleaning-service.png`."
         }
       ]
     }

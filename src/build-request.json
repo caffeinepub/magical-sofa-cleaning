@@ -1,70 +1,111 @@
 {
   "kind": "build_request",
-  "title": "Add detailed Service Areas section (Ahmedabad + Gandhinagar) to landing page",
+  "title": "Update landing page to simplified rate list + UPI payment layout (English text) with subtle UPI fade-in",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Implement a new “Service Areas” section on the landing page (frontend/src/components/LandingPage.tsx) that matches the structure and Tailwind styling provided by the user’s HTML snippet: section wrapper (py-16 bg-white), container layout, a centered H2 title, and a responsive 2-column grid containing two area cards (Ahmedabad and Gandhinagar) each with a title row and an inner responsive grid list of locality <span> items.",
+      "text": "Refactor `frontend/src/components/LandingPage.tsx` to match the structure and styling of the user-provided HTML snippet: a minimal single-page layout containing (1) a sticky top navigation bar with logo + brand text and a call button, (2) a two-card services rate list section (Cleaning and AC Service), (3) a centered UPI payment section with QR code + UPI ID + service area caption, and (4) a simple footer. Remove or hide the existing extra marketing sections (hero, estimator, booking form, maps, testimonials, floating WhatsApp button, etc.) so the page renders primarily the new simplified layout.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-4"
         ],
         "quotes": [
-          "<section class=\"py-16 bg-white\"> ... <h2 class=\"text-3xl font-bold text-center mb-10 text-gray-800\">અમારા સર્વિસ વિસ્તારો (Service Areas)</h2> ... </section>"
+          "<nav class=\"bg-white shadow-lg sticky top-0 z-50 p-4\">",
+          "<h3 class=\"text-2xl font-black mb-6 text-orange-800 ...\">Cleaning</h3>",
+          "<h3 class=\"text-xl font-bold text-blue-900 mb-4\">Pay Online via UPI</h3>",
+          "© 2026 Magical Service - Professional Cleaning Experts"
         ]
       },
       "acceptanceCriteria": [
-        "LandingPage renders a dedicated Service Areas section with the same layout semantics as the provided snippet (section > container > h2 > 2-column card grid).",
-        "On mobile it displays 1 column; on md+ it displays 2 columns, matching the snippet’s responsive behavior.",
-        "Each card contains an inner grid that becomes 3 columns on small screens (sm:grid-cols-3) as in the snippet."
+        "The landing page renders only the sections represented in the provided snippet: navbar, rate list, UPI payment, footer (no large hero/estimator/maps/testimonials/booking sections).",
+        "Navbar remains sticky (`sticky top-0 z-50`) with a tel: link using `+918000262644` and visible label `80002 62644`.",
+        "The rate list shows two cards (Cleaning and AC Service) with the exact line items and prices shown in the snippet.",
+        "The UPI section shows the QR image and UPI ID exactly as in the snippet (including the UPI ID `jrg7311@okicici`).",
+        "The footer displays the copyright text for 2026 as in the snippet."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Preserve the exact Service Areas content from the user’s snippet (including Gujarati locality names and the existing parenthetical English descriptors like “(Service Areas)”, “(All Over Ahmedabad)”, and “(All Over Gandhinagar)”), and include the concluding italic note line exactly as provided.",
+      "text": "Convert all non-English user-facing strings in the provided snippet to English in the updated React page (keep all phone number, UPI ID, and pricing values unchanged). Specifically replace the Gujarati heading/subheading in the rate list section with clear English equivalents.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-4"
         ],
         "quotes": [
-          "અમદાવાદ (All Over Ahmedabad) ... ગાંધીનગર (All Over Gandhinagar) ... * ઉપર દર્શાવેલ તમામ વિસ્તારોમાં અમે **Home Service** પૂરી પાડીએ છીએ."
+          "<h2 class=\"text-3xl font-bold text-slate-800 mb-2\">અમારી ખાસ સેવાઓ અને રેટ લિસ્ટ</h2>",
+          "<p class=\"text-blue-600 font-bold italic\">અમદાવાદ અને ગાંધીનગરમાં સૌથી વ્યાજબી ભાવ</p>"
         ]
       },
       "acceptanceCriteria": [
-        "All localities listed in the snippet appear on the page (Ahmedabad list + Gandhinagar list) with no omissions or renaming.",
-        "The concluding note line renders at the bottom of the section with italic styling and the same visible text as the snippet."
+        "No Gujarati (or other non-English) text is visible on the landing page after the update.",
+        "The rate list section heading/subheading are in English and communicate the same meaning (services + rate list; affordable pricing in Ahmedabad & Gandhinagar)."
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Replace the snippet’s Font Awesome icon usage (<i class=\"fas fa-map-marker-alt\">) with an equivalent icon approach already used in the project (e.g., a lucide-react map/pin icon), while keeping the same visual placement (icon to the left of each city heading). Do not add Font Awesome as a dependency.",
+      "text": "Implement a subtle soft fade-in animation for the UPI payment box (the card that contains the QR code and UPI ID). The animation should trigger on initial render (or when the section scrolls into view) and must not rely on external libraries not already present in the project.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-3"
         ],
         "quotes": [
-          "<i class=\"fas fa-map-marker-alt mr-2\"></i>"
+          "want to add a soft fade‑in on the UPI payment box for a bit more polish?"
         ]
       },
       "acceptanceCriteria": [
-        "Each city heading shows a map-marker style icon aligned inline before the heading text.",
-        "No Font Awesome dependency or <i class=\"fas ...\"> usage remains in the codebase."
+        "The UPI payment card visibly fades in (opacity/translate) in a subtle way without jarring motion.",
+        "Animation does not break layout and remains accessible (no essential information hidden permanently)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Avoid Font Awesome `<i class=\"fas ...\">` usage from the snippet in the React implementation; use existing icon tooling already in the codebase (e.g., `lucide-react` Phone icon) while keeping the visual intent of a phone icon next to the call-to-action.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "<i class=\"fas fa-phone-alt mr-1\"></i> 80002 62644"
+        ]
+      },
+      "acceptanceCriteria": [
+        "No Font Awesome dependency is introduced and no `<i class=\"fas ...\">` remains in the React code.",
+        "The call button still includes a phone icon and the phone number label."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Preserve the user-provided external asset URLs exactly where used in the snippet, including the logo URL `https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png` and the QR generator URL `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR`. Ensure the logo has a working fallback behavior in React when the logo fails to load (fallback to `https://img.icons8.com/color/96/000000/cleaning-service.png`).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "src=\"https://magical-sofa-cleaning-7pe.caffeine.xyz/logo.png\"",
+          "onerror=\"this.src='https://img.icons8.com/color/96/000000/cleaning-service.png'\"",
+          "src=\"https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=jrg7311@okicici&pn=Magical%20Service&cu=INR\""
+        ]
+      },
+      "acceptanceCriteria": [
+        "The page uses the QR URL with `size=180x180` exactly as provided.",
+        "If the logo URL fails, the logo displays the icons8 fallback image."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui (read-only).",
-    "Do not modify frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
-    "Backend remains single-actor; no backend changes are required for this UI-only section."
+    "Frontend immutable paths must not be edited: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, and anything under `frontend/src/components/ui`.",
+    "Backend must remain single-actor architecture; no backend changes are required for this request."
   ],
   "nonGoals": [
     "Do not add or change Internet Identity authentication behavior.",
-    "Do not change existing SEO meta tags or add structured data unless explicitly requested.",
-    "Do not introduce new third-party icon libraries (e.g., Font Awesome)."
+    "Do not add new booking flows, WhatsApp redirects, Google Maps embeds, testimonials, or AI price estimator features beyond what is necessary to match the provided simplified snippet.",
+    "Do not introduce new icon libraries (e.g., Font Awesome)."
   ],
   "imageRequirements": {
     "required": [],
